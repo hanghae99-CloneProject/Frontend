@@ -7,6 +7,7 @@ const store = configureStore({
     serializableCheck: false,
     // 직렬화 오류 없애기. 왜 직렬화 오류 뜨는지?
   }),
+
 });
 
 export default store;
