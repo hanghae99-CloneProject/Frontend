@@ -7,7 +7,7 @@ export const addMemberThunk = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log(payload);
     try {
-      const { data } = await instance.post("bunjang/singup", payload);
+      const { data } = await instance.post("bunjang/signup", payload);
       console.log(data.date);
       //if (data.success === false) alert("중복된 이메일입니다.");
       // 중복이메일 code?

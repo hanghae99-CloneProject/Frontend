@@ -46,7 +46,7 @@ const LoginForm = () => {
       "pw" : pw
       }
     // 서버로 보내줄 로그인값
-    const data = instance.post('bunjang/singup', LoginValue)
+    const data = instance.post('bunjang/login', LoginValue)
     .then(res => {
       console.log(res)
       setCookie('refreshToken', res.request.getResponseHeader('refresh-token'))
@@ -57,6 +57,7 @@ const LoginForm = () => {
 
     const onSubmitSignUpHandler = (event) => {
       event.preventDefault();
+      event.stopPropagation();
       if(signPw != signPwC) alert("비밀번호와 확인란의 입력 값이 동일하지 않습니다!")
       dispatch(addMemberThunk({
         email:signEmail,
@@ -79,7 +80,7 @@ const LoginForm = () => {
         <h3>번개장터로 중고거래 시작하기</h3>
         <b>간편하게 가입하고 상품을 확인하세요</b>
       </div>
-      <form className="form-boxModal">
+      <form className="form-boxModal" onSubmit={onSubmitSignUpHandler}>
         <div className="input-box">
         <span>Email </span>
         <input
@@ -116,9 +117,9 @@ const LoginForm = () => {
         <div className="button-container">
           <div className="how-loginDiv">
           <span className="how-login">이미 가입하셨나요? </span>
-          <button className="button-text" onClick={exitModal}>로그인</button>
+          <button className="button-text" type="button" onClick={exitModal}>로그인</button>
           </div>
-          <button className="button-go" onClick={()=> {onSubmitSignUpHandler(); exitModal()}}>회원가입</button>
+          <button className="button-go" onClick={exitModal} >회원가입</button>
         </div>
       </form>
     </div>
