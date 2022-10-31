@@ -2,7 +2,7 @@
   padding: auto;
   margin: 200px auto auto auto;
   max-width: 420px;
-  height: 506px;
+  min-height: 506px;
   background-color: whitesmoke;
 }
 .wrapModal {
