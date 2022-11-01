@@ -1,7 +1,7 @@
 import React from "react";
 import "./loginForm.css"
 import useInput from "../../hooks/useInput"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import instance from "../../shared/request";
@@ -21,11 +21,27 @@ const LoginForm = () => {
   //쿠키 저장
   const dispatch = useDispatch();
   // 리덕스 보내기
+  const navigate = useNavigate();
 
+  // 1번 버튼에 핸들러 붙여서 비우기
+  const signInit = {
+      signEmail:"",
+      signPw:"",
+      signPwC:"",
+    }
+  const [signEmpty, setSignEmpty] = useState(signInit);
+  const signEmptyHandler = (e) => {
+    setSignEmpty(signInit);
+  };
+  
   const showModal = () => {
     setIsModal(!isModal);
   };
-  const exitModal = () => {
+
+  // 3번 모달 나갈 때 form에 제출하지 않고 비우기 함수만 호출
+  const exitModal = (e) => {
+    e.stopPropagation();
+    signEmptyHandler();
     setIsModal(isModal);
   }
   //모달창 보이기 끄기
@@ -46,23 +62,33 @@ const LoginForm = () => {
       "pw" : pw
       }
     // 서버로 보내줄 로그인값
-    const data = instance.post('bunjang/singup', LoginValue)
+    const data = instance.post('bunjang/login', LoginValue)
     .then(res => {
       console.log(res)
+      console.log(res.data)
+      console.log(res.data.statusMsg)
       setCookie('refreshToken', res.request.getResponseHeader('refresh-token'))
       setCookie('token', res.request.getResponseHeader('authorization'))
-    })}
+      if (res.data === null || undefined) alert ("로그인 정보를 확인해주세요!")
+      navigate("/");
+    })
+    
+  }
     // 서버로 데이터를 보내서 응답을 받으면 토큰을 꺼내 쿠키에 저장
     // res 확인후 조건문달아서
 
     const onSubmitSignUpHandler = (event) => {
       event.preventDefault();
-      if(signPw != signPwC) alert("비밀번호와 확인란의 입력 값이 동일하지 않습니다!")
+      // 서버단 처리 if(signPw != signPwC) alert("비밀번호와 확인란의 입력 값이 동일하지 않습니다!")
       dispatch(addMemberThunk({
         email:signEmail,
         pw:signPw,
         pwConfirm:signPwC}));
+        setSignEmpty(signInit)
+        // 2번 제출할 때 비우기
+        setIsModal(false)
     }
+    
     // 서버로 성크 사용해서 이메일 비번 비번확인 보내주기
 
   return (
@@ -75,11 +101,12 @@ const LoginForm = () => {
           <Link to="/">
             <img src="https://m.bunjang.co.kr/pc-static/resource/56db3dd43075482b1d31.png" style={{width:30}}/>
           </Link>
+          <div>홈페이지로 이동</div>
           {/* 버튼 링크 누르면 홈페이지로 이동 */}
         <h3>번개장터로 중고거래 시작하기</h3>
         <b>간편하게 가입하고 상품을 확인하세요</b>
       </div>
-      <form className="form-boxModal">
+      <form className="form-boxModal" onSubmit={onSubmitSignUpHandler}>
         <div className="input-box">
         <span>Email </span>
         <input
@@ -116,9 +143,9 @@ const LoginForm = () => {
         <div className="button-container">
           <div className="how-loginDiv">
           <span className="how-login">이미 가입하셨나요? </span>
-          <button className="button-text" onClick={exitModal}>로그인</button>
+          <button className="button-text" type="button" onClick={exitModal} >로그인</button>
           </div>
-          <button className="button-go" onClick={()=> {onSubmitSignUpHandler(); exitModal()}}>회원가입</button>
+          <button className="button-go"type="submit" onClick={signEmptyHandler}>회원가입</button>
         </div>
       </form>
     </div>
@@ -132,12 +159,13 @@ const LoginForm = () => {
     // 위쪽 모달창 클릭했을때 회원가입 구현
   ) : (
     // 아래쪽 로그인창 구현
-  <div className="wrap">
+  <div className="wrap-login">
   <div className="wrap-top">
   <div className="logo">
   <Link to="/">
   <img src="https://m.bunjang.co.kr/pc-static/resource/56db3dd43075482b1d31.png" style={{width:30}}/>
   </Link>
+  <div>홈페이지로 이동</div>
   {/* 버튼 링크 누르면 홈페이지로 이동 */}
   <h3>번개장터로 중고거래 시작하기</h3>
   <b>간편하게 가입하고 상품을 확인하세요</b>
