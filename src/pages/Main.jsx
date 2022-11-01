@@ -1,9 +1,15 @@
 import React from "react";
-import Layout from "../components/layout/Layout";
+import Footer from "../components/footer/Footer";
+import Header from "../components/header/Header";
+import MainView from "../components/main/MainView";
 
 const Main = () => {
   return (
-      <div>Main</div>
+    <div>
+      <Header />
+      <MainView />
+      <Footer />
+    </div>
   );
 };
 
