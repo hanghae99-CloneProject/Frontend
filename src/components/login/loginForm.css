@@ -1,4 +1,4 @@
-.wrap {
+.wrap-login {
   padding: auto;
   margin: 200px auto auto auto;
   max-width: 420px;
@@ -17,6 +17,9 @@
 }
 .logo {
   text-align: center;
+}
+.logo-wrap {
+  display: flex;
 }
 .logo-button {
   border: none;

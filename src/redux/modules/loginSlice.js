@@ -8,9 +8,8 @@ export const addMemberThunk = createAsyncThunk(
     console.log(payload);
     try {
       const { data } = await instance.post("bunjang/signup", payload);
-      console.log(data.date);
-      //if (data.success === false) alert("중복된 이메일입니다.");
-      // 중복이메일 code?
+      console.log(data.statusMsg);
+      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
