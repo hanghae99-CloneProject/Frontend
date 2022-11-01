@@ -1,8 +1,8 @@
-.wrap {
+.wrap-login {
   padding: auto;
   margin: 200px auto auto auto;
   max-width: 420px;
-  height: 506px;
+  min-height: 506px;
   background-color: whitesmoke;
 }
 .wrapModal {
@@ -17,6 +17,9 @@
 }
 .logo {
   text-align: center;
+}
+.logo-wrap {
+  display: flex;
 }
 .logo-button {
   border: none;
