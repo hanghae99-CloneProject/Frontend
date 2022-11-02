@@ -8,7 +8,7 @@ export const __imgPost = createAsyncThunk(
     try {
       const imgPost = await axios({
         method: "post",
-        url: `http://3.38.93.252/bunjang/file`,
+        url: `http://localhost:3001/posts`,
         // http://3.38.93.252/bunjang/posts
         data: payload,
         headers: {
@@ -28,7 +28,7 @@ export const __imgGet = createAsyncThunk(
     try {
       const getPost = await axios({
         method: "get",
-        url: `http://3.38.93.252/bunjang/file`,
+        url: `http://localhost:3001/posts`,
         payload,
         //   headers: {
         //     "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export const __writePost = createAsyncThunk(
     try {
       const post = await axios({
         method: "post",
-        url: `http://3.38.93.252/bunjang/posts`,
+        url: `http://localhost:3001/posts`,
         data: payload,
         // http://3.38.93.252/bunjang/posts
         // headers: {
@@ -66,13 +66,13 @@ export const __writePost = createAsyncThunk(
   }
 );
 
-export const __mainPost = createAsyncThunk(
-  "MAIN_POST",
+export const __mainGet = createAsyncThunk(
+  "MAIN_GET",
   async (payload, thunkAPI) => {
     try {
       const getPost = await axios({
         method: "get",
-        url: `http://3.38.93.252/bunjang/posts`,
+        url: `http://localhost:3001/posts`,
         data: payload,
         //   headers: {
         //     "Content-Type": "application/json",
@@ -108,7 +108,7 @@ const PostSlice = createSlice({
     [__imgGet.fulfilled]: (state, action) => {
       state.list = action.payload;
     },
-    [__mainPost.fulfilled]: (state, action) => {
+    [__mainGet.fulfilled]: (state, action) => {
       state.list = action.payload;
     },
   },

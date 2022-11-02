@@ -34,7 +34,7 @@
   margin-top: 20px;
   top: 50%;
   left: 50%;
-  transform: translate( -50%, -50%);
+  transform: translate(-50%, -50%);
 }
 .info-email {
   height: 310px;
