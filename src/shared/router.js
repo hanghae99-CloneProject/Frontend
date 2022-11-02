@@ -6,6 +6,7 @@ import SellPost from "../pages/SellPost";
 import MyPage from "../pages/Mypage";
 import ViewPost from "../pages/ViewPost";
 
+
 const Router = () => {
   return (
     <BrowserRouter>
