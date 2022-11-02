@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "../pages/Main";
 import Login from "../pages/Login";
 import SellPost from "../pages/SellPost";
-import MyPage from "../pages/MyPage";
+import MyPage from "../pages/Mypage";
 
 const Router = () => {
   return (

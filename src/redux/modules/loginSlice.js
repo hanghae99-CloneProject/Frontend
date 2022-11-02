@@ -5,11 +5,13 @@ import instance from "../../shared/request";
 export const addMemberThunk = createAsyncThunk(
   "ADD_MEMBER",
   async (payload, thunkAPI) => {
-    console.log(payload);
+    //console.log(payload);
     try {
       const { data } = await instance.post("bunjang/signup", payload);
-      console.log(data.statusMsg);
-      console.log(data);
+      if (data.statusCode == 117 || 118) alert(data.statusMsg);
+      // console.log(data);
+      // console.log(data.statusCode);
+      // console.log(data.statusMsg);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

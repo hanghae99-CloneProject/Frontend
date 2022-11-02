@@ -5,19 +5,19 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import instance from "../../shared/request";
-import { useCookies } from "react-cookie";
+import { useCookies } from "react-cookie"
 import { addMemberThunk } from "../../redux/modules/loginSlice";
 
 const LoginForm = () => {
-  const [email, setEmail, onChangeLoginEmailHandler] = useInput("");
-  const [pw, setPw, onChangeLoginPwHandler] = useInput("");
-  const [signEmail, setSignEmail, onChangeSignEmailHandler] = useInput("");
-  const [signPw, setSignPw, onChangeSignPwHandler] = useInput("");
-  const [signPwC, setSignPwC, onChangeSignPwCHandler] = useInput("");
+  const [ email, setEmail, onChangeLoginEmailHandler ] = useInput('');
+  const [ pw, setPw, onChangeLoginPwHandler ] = useInput('');
+  const [ signEmail, setSignEmail, onChangeSignEmailHandler] = useInput("");
+  const [ signPw, setSignPw, onChangeSignPwHandler] = useInput("");
+  const [ signPwC, setSignPwC, onChangeSignPwCHandler] = useInput("");
   // hook 사용해 input 관리
   const [isModal, setIsModal] = useState(false);
   // 모달창 관리
-  const [cookie, setCookie, removeCookie] = useCookies();
+  const [ cookie, setCookie, removeCookie ] = useCookies();
   //쿠키 저장
   const dispatch = useDispatch();
   // 리덕스 보내기
@@ -43,36 +43,41 @@ const LoginForm = () => {
     e.stopPropagation();
     signEmptyHandler();
     setIsModal(isModal);
-  };
+  }
   //모달창 보이기 끄기
 
   const onSubmitLoginHandler = (event) => {
     event.preventDefault();
-    if (email.trim() === "") {
+    if (email.trim() ==="") {
       alert("이메일을 입력해 주세요!");
-      return;
+      return
     }
-    if (pw.trim() === "") {
+    if (pw.trim() ==="") {
       alert("비밀번호를 입력해 주세요!");
-      return;
+      return
     }
     // 이메일 비번입력안하면 알럿창
     const LoginValue = {
-      email: email,
-      pw: pw,
-    };
+      "email" : email,
+      "pw" : pw
+      }
     // 서버로 보내줄 로그인값
     const data = instance.post('bunjang/login', LoginValue)
     .then(res => {
-      console.log(res)
-      console.log(res.data)
-      console.log(res.data.statusMsg)
+      // console.log(res)
+      // console.log(res.data.data)
+      // console.log(res.data.data.email)
+      // console.log(res.data.statusMsg)
+      // console.log(res.data.statusCode)
       setCookie('refreshToken', res.request.getResponseHeader('refresh-token'))
       setCookie('token', res.request.getResponseHeader('authorization'))
-      if (res.data === null || undefined) alert ("로그인 정보를 확인해주세요!")
-      navigate("/");
-    })
-    
+      if (res.data.statusCode == 0 ) {
+        localStorage.setItem("email", res.data.data.email)
+        navigate("/")
+        window.location.reload();
+        // 리로드 어떻게하는지 모르겠음.
+      } else { alert(res.data.statusMsg) }
+    }) 
   }
     // 서버로 데이터를 보내서 응답을 받으면 토큰을 꺼내 쿠키에 저장
     // res 확인후 조건문달아서
@@ -147,7 +152,14 @@ const LoginForm = () => {
           </div>
           <button className="button-go"type="submit" onClick={signEmptyHandler}>회원가입</button>
         </div>
-      )}
+      </form>
+    </div>
+      <hr/>
+      <div className="wrap-bottom">
+        <div className="reference">도움이 필요하면 kkjh9960@gmail.com로 문의 부탁드립니다.</div>
+        <div className="reference">메일 확인 시간 : 9시~18시(점심시간 12~13시, 주말공휴일 제외)</div>
+      </div>
+    </div>
     </div>
     // 위쪽 모달창 클릭했을때 회원가입 구현
   ) : (
