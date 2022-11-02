@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./header.css";
 import appImg from "../img/appimg.svg";
 import startImg from "../img/starimg.svg";
@@ -8,11 +8,21 @@ import headerIcon2 from "../img/headerIcon2.png";
 import headerIcon3 from "../img/headerIcon3.png";
 import logo from "../img/Logo.svg";
 import searchBtn from "../img/searchBtn.png";
-import x from "../img/x.png";
 import sellerCenter from "../img/go.png";
 import menu from "../img/menu.svg";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const logoClickHandler = () => {
+    navigate("/");
+  };
+  const sellClickHandler = () => {
+    navigate("/posts");
+  };
+  const mypageClickHandler = () => {
+    navigate("/mypage");
+  };
   return (
     <>
       <div className="headerWrap">
@@ -40,7 +50,7 @@ const Header = () => {
           <div className="headerContainer">
             <div className="headerContent">
               <div>
-                <p>
+                <p onClick={logoClickHandler}>
                   <img src={logo} alt="app" />
                 </p>
               </div>
@@ -56,11 +66,11 @@ const Header = () => {
                 </div>
               </div>
               <div className="myMenu">
-                <p>
+                <p onClick={sellClickHandler}>
                   <img src={headerIcon1} alt="" />
                   판매하기
                 </p>
-                <p>
+                <p onClick={mypageClickHandler}>
                   <img src={headerIcon2} alt="" />
                   내상점
                 </p>

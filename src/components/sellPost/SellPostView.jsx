@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import {
   __imgGet,
   __imgPost,
@@ -19,6 +20,7 @@ const SellPostView = () => {
   const [tag, setTag] = useState("");
   const [amount, setAmount] = useState("1");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const imgGet = useSelector((state) => state.postReducer.list[1]);
   console.log(imgGet);
 
@@ -70,7 +72,7 @@ const SellPostView = () => {
     e.preventDefault();
     dispatch(
       __writePost({
-        img_id: imgGet.id,
+        // img_id: imgGet.id,
         title,
         category,
         local,
@@ -82,6 +84,7 @@ const SellPostView = () => {
         amount,
       })
     );
+    navigate("/");
   };
   return (
     <div>

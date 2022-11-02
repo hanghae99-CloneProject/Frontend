@@ -4,14 +4,16 @@ import bunjangImg from "../img/bunjangImg.jpeg";
 import "./mainView.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { __mainPost } from "../../redux/modules/postSlice";
+import { __mainGet } from "../../redux/modules/postSlice";
+import { useNavigate } from "react-router";
 const MainView = () => {
   const mainpost = useSelector((state) => state.postReducer.list);
   console.log(mainpost);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(__mainPost());
+    dispatch(__mainGet());
   }, [dispatch]);
 
   return (
@@ -27,7 +29,13 @@ const MainView = () => {
         <div className="prdContent">
           {mainpost !== undefined
             ? mainpost.map((x) => {
-                <div className="item">
+                <div
+                  className="item"
+                  key={x.id}
+                  onClick={() => {
+                    navigate(`posts/get/${x.id}`);
+                  }}
+                >
                   <div className="thumb">
                     <img src={x.media} />
                   </div>
