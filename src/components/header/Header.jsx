@@ -1,5 +1,5 @@
-import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./header.css";
 import appImg from "../img/appimg.svg";
 import startImg from "../img/starimg.svg";
@@ -8,14 +8,12 @@ import headerIcon2 from "../img/headerIcon2.png";
 import headerIcon3 from "../img/headerIcon3.png";
 import logo from "../img/Logo.svg";
 import searchBtn from "../img/searchBtn.png";
-import x from "../img/x.png";
 import sellerCenter from "../img/go.png";
 import menu from "../img/menu.svg";
 import { useNavigate } from "react-router";
 import instance from "../../shared/request";
 
 const Header = () => {
-
   const email = localStorage.getItem("email");
   // 로그인 여부는 로그인했을 때 이메일을 로컬에 저장해서 불러옴
   const navigate = useNavigate();
@@ -36,7 +34,6 @@ const Header = () => {
       // 리로드 어떻게하는지 모르겠음
     })
   }
-
   return (
     <>
       <div className="headerWrap">

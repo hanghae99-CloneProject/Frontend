@@ -1,8 +1,7 @@
 import React from "react";
-import "./myPageView.css"
+import "./mypageView.css";
 
 const MyPageView = () => {
-
   const [currentClick, setCurrentClick] = React.useState(null);
   const [prevClick, setPrevClick] = React.useState(null);
   const email = localStorage.getItem("email");
@@ -61,24 +60,23 @@ const MyPageView = () => {
               </div>
             </div>
           ))} */}
-        <div className="item">
-          <div className="thumb">
-            <img src="" alt="" />
+            <div className="item">
+              <div className="thumb">
+                <img src="" alt="" />
               </div>
-            <div className="prdInfo">
-            <p className="prdTitle">타이틀</p>
-            <p className="price">
-            10000<span>원</span>
-            <span className="location">인천광역시 남동구 송도</span>
-            </p>
+              <div className="prdInfo">
+                <p className="prdTitle">타이틀</p>
+                <p className="price">
+                  10000<span>원</span>
+                  <span className="location">인천광역시 남동구 송도</span>
+                </p>
+              </div>
+            </div>
           </div>
-        </div>            
         </div>
       </div>
-      </div>
     </div>
-  )
-
-}
+  );
+};
 
 export default MyPageView;
