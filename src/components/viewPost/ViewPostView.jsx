@@ -13,8 +13,6 @@ const ViewPostView = () => {
   );
   const viewId = [view];
   console.log(viewId);
-  const viewImg = view.media.mediaUrl;
-  console.log(viewImg);
 
   console.log(view);
   const dispatch = useDispatch();
@@ -38,7 +36,7 @@ const ViewPostView = () => {
             <div className="DetailMainContainer" key={id}>
               <div className="SellInfo">
                 <div className="ImgBox">
-                  <img src={viewImg} width="400px" height="400px"></img>
+                  <img src={viewId.mediaUrl} width="400px" height="400px"></img>
                 </div>
                 <div className="InfoBox">
                   <div className="ProductContentsBox">
