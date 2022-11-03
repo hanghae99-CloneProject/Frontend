@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import {
-  __imgGet,
-  __imgPost,
-  __writePost,
-} from "../../redux/modules/postSlice";
+import { __imgPost, __writePost } from "../../redux/modules/postSlice";
 import "./sellPostView.css";
 
 const SellPostView = () => {
@@ -72,7 +68,7 @@ const SellPostView = () => {
     e.preventDefault();
     dispatch(
       __writePost({
-        // img_id: imgGet.id,
+        img_id: imgGet.id,
         title,
         category,
         local,
@@ -84,6 +80,7 @@ const SellPostView = () => {
         amount,
       })
     );
+    alert("판매글이 작성되었습니다.");
     navigate("/");
   };
   return (
@@ -109,17 +106,19 @@ const SellPostView = () => {
                 상품이미지<span>*</span>
               </p>
               <div className="fileBox">
-                <label htmlFor="img"></label>
-                <input id="img" type="file" onChange={mediaChangeHandler} />
-                {imgGet !== undefined
-                  ? imgGet.mediaUrl && (
-                      <img
-                        className="prevImage"
-                        src={imgGet.mediaUrl}
-                        alt="preview-img"
-                      />
-                    )
-                  : null}
+                <div className="fileImgBox">
+                  <label htmlFor="img"></label>
+                  {imgGet !== undefined
+                    ? imgGet.mediaUrl && (
+                        <img
+                          className="prevImage"
+                          src={imgGet.mediaUrl}
+                          alt="preview-img"
+                        />
+                      )
+                    : null}
+                  <input id="img" type="file" onChange={mediaChangeHandler} />
+                </div>
                 <p>
                   <strong>
                     * 상품 이미지는 640x640에 최적화 되어 있습니다.

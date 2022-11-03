@@ -2,9 +2,10 @@ input {
   border: none;
   outline: none;
 }
+
 .prevImage {
-  height: 100%;
-  width: 100%;
+  height: 202px;
+  width: 200px;
 }
 .newContainer {
   width: 100%;
@@ -82,13 +83,14 @@ input {
   background-image: url("../img/img_none.png");
   cursor: pointer;
   border: 1px solid rgb(220, 219, 228);
-  display: block;
+  display: inline-block;
   overflow: hidden;
 }
 .fileBox input {
   display: none;
 }
 .fileBox p {
+  display: block;
   margin-top: 1.5rem;
   color: rgb(74, 164, 255);
   line-height: 1.5;
