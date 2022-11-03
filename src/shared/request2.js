@@ -8,15 +8,12 @@ const token2 = new Cookies().get("refreshToken");
 
 axios.defaults.headers.common["Authorization"] = `${token}`;
 axios.defaults.headers.common["Refresh-Token"] = `${token2}`;
-
-console.log(token, token2);
 // header에 토큰 받은것 담아주기 >> refresh 토큰으로 연장
 
-const instance = axios.create({
+const instance2 = axios.create({
   baseURL: "https://coding-kym.shop",
-
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     Authorization: `${token}`,
     "Refresh-Token": `${token2}`,
   },
@@ -26,4 +23,4 @@ const instance = axios.create({
 //  Headers.authorization = `Bearer ${token}`
 //}
 
-export default instance;
+export default instance2;

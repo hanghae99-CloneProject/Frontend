@@ -5,12 +5,15 @@ import instance from "../../shared/request";
 export const addMemberThunk = createAsyncThunk(
   "ADD_MEMBER",
   async (payload, thunkAPI) => {
-    console.log(payload);
+
+    //console.log(payload);
     try {
-      const { data } = await instance.post("bunjang/singup", payload);
-      console.log(data.date);
-      //if (data.success === false) alert("중복된 이메일입니다.");
-      // 중복이메일 code?
+      const { data } = await instance.post("bunjang/signup", payload);
+      if (data.statusCode == 117 || 118) alert(data.statusMsg);
+      // console.log(data);
+      // console.log(data.statusCode);
+      // console.log(data.statusMsg);
+
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
