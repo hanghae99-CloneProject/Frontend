@@ -1,4 +1,5 @@
 import React from "react";
+
 import "./loginForm.css";
 import useInput from "../../hooks/useInput";
 import { Link, useNavigate } from "react-router-dom";
@@ -34,9 +35,11 @@ const LoginForm = () => {
     setSignEmpty(signInit);
   };
 
+
   const showModal = () => {
     setIsModal(!isModal);
   };
+
 
   // 3번 모달 나갈 때 form에 제출하지 않고 비우기 함수만 호출
   const exitModal = (e) => {
@@ -44,10 +47,12 @@ const LoginForm = () => {
     signEmptyHandler();
     setIsModal(isModal);
   };
+
   //모달창 보이기 끄기
 
   const onSubmitLoginHandler = (event) => {
     event.preventDefault();
+
     if (email.trim() === "") {
       alert("이메일을 입력해 주세요!");
       return;

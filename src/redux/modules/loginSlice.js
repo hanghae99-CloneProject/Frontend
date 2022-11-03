@@ -5,6 +5,7 @@ import instance from "../../shared/request";
 export const addMemberThunk = createAsyncThunk(
   "ADD_MEMBER",
   async (payload, thunkAPI) => {
+
     //console.log(payload);
     try {
       const { data } = await instance.post("bunjang/signup", payload);
@@ -12,6 +13,7 @@ export const addMemberThunk = createAsyncThunk(
       // console.log(data);
       // console.log(data.statusCode);
       // console.log(data.statusMsg);
+
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
