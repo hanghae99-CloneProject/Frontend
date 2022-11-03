@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __mainGet } from "../../redux/modules/postSlice";
 import { useNavigate } from "react-router";
 const MainView = () => {
-  const mainpost = useSelector((state) => state.postReducer.list);
+  const mainpost = useSelector((state) => state.postReducer.list.data);
   console.log(mainpost);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,89 +27,28 @@ const MainView = () => {
           <div className="title">오늘의 상품 추천</div>
         </div>
         <div className="prdContent">
-          {mainpost !== undefined
-            ? mainpost.map((x) => {
-                <div
-                  className="item"
-                  key={x.id}
-                  onClick={() => {
-                    navigate(`posts/get/${x.id}`);
-                  }}
-                >
-                  <div className="thumb">
-                    <img src={x.media} />
-                  </div>
-                  <div className="prdInfo">
-                    <p className="prdTitle">{x.title}</p>
-                    <p className="price">
-                      {x.price}
-                      <span>원</span>
-                      <span className="time">1시간 전</span>
-                    </p>
-                  </div>
-                </div>;
-              })
-            : null}
-          {/* <div className="item">
-            <div className="thumb">
-              <img src="" alt="" />
-            </div>
-            <div className="prdInfo">
-              <p className="prdTitle">타이틀</p>
-              <p className="price">
-                10000<span>원</span>
-                <span className="time">1시간 전</span>
-              </p>
-            </div>
-          </div>
-          <div className="item">
-            <div className="thumb">
-              <img src="" alt="" />
-            </div>
-            <div className="prdInfo">
-              <p className="prdTitle">타이틀</p>
-              <p className="price">
-                10000<span>원</span>
-                <span className="time">1시간 전</span>
-              </p>
-            </div>
-          </div>
-          <div className="item">
-            <div className="thumb">
-              <img src="" alt="" />
-            </div>
-            <div className="prdInfo">
-              <p className="prdTitle">타이틀</p>
-              <p className="price">
-                10000<span>원</span>
-                <span className="time">1시간 전</span>
-              </p>
-            </div>
-          </div>
-          <div className="item">
-            <div className="thumb">
-              <img src="" alt="" />
-            </div>
-            <div className="prdInfo">
-              <p className="prdTitle">타이틀</p>
-              <p className="price">
-                10000<span>원</span>
-                <span className="time">1시간 전</span>
-              </p>
-            </div>
-          </div>
-          <div className="item">
-            <div className="thumb">
-              <img src="" alt="" />
-            </div>
-            <div className="prdInfo">
-              <p className="prdTitle">타이틀</p>
-              <p className="price">
-                10000<span>원</span>
-                <span className="time">1시간 전</span>
-              </p>
-            </div>
-          </div> */}
+          {mainpost &&
+            mainpost.map((main) => (
+              <div
+                className="item"
+                key={main.id}
+                onClick={() => {
+                  navigate(`/posts/get/${main.id}`);
+                }}
+              >
+                <div className="thumb">
+                  <img src={main.mediaUrl} />
+                </div>
+                <div className="prdInfo">
+                  <p className="prdTitle">{main.title}</p>
+                  <p className="price">
+                    {main.price}
+                    <span>원</span>
+                    <span className="time"></span>
+                  </p>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </div>
