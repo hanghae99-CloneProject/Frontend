@@ -20,13 +20,15 @@ const ViewPostView = () => {
   // const viewId = view?.find((view) => view.id === id);
   // console.log(viewId);
   useEffect(() => {
-    dispatch(__viewGet(id));
+    dispatch(__viewGet(id.toString()));
   }, [dispatch]);
 
   const changeClickHandler = () => {};
   const deleteClickHandler = () => {
     dispatch(__deletePost(id));
+    alert("삭제되었습니다.");
     navigate("/");
+    window.location.reload();
   };
 
   return (
